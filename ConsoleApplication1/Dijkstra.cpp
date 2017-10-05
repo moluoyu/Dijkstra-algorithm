@@ -1,53 +1,58 @@
-/*
-*/
+/**
+ * æ„Ÿè°¢å¤§ç¥ï¼Œä»£ç æ¥æºï¼šhttps://www.61mon.com/index.php/archives/194/
+ * 
+ *ç®—æ³•æ€è·¯   http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html
+ * 
+ * 
+ */
 
 #include <iostream>
 
 using namespace std;
 
-int  matrix[100][100]; // ÁÚ½Ó¾ØÕó
-bool visited[100];     // ±ê¼ÇÊı×é
-int  dist[100];        // Ô´µãµ½¶¥µãiµÄ×î¶Ì¾àÀë
-int  path[100];        // ¼ÇÂ¼×î¶ÌÂ·µÄÂ·¾¶
-int  source;           // Ô´µã
-int  vertex_num;       // ¶¥µãÊı
-int  side_num;         // ±ßÊı
+int  matrix[100][100]; // é‚»æ¥çŸ©é˜µ
+bool visited[100];     // æ ‡è®°æ•°ç»„
+int  dist[100];        // æºç‚¹åˆ°é¡¶ç‚¹içš„æœ€çŸ­è·ç¦»
+int  path[100];        // è®°å½•æœ€çŸ­è·¯çš„è·¯å¾„
+int  source;           // æºç‚¹
+int  vertex_num;       // é¡¶ç‚¹æ•°
+int  side_num;         // è¾¹æ•°
 
 void Dijkstra(int source)
 {
-	memset(visited, 0, sizeof(visited));  // ³õÊ¼»¯±ê¼ÇÊı×é ½«Êı×évisitedÈ«²¿ÉèÎª0
-	visited[source] = true;  // visitedÊı×é¼ÇÂ¼¸ÃµãÊÇ·ñ±éÀú¹ı
-	for (int i = 0; i < vertex_num; i++)//³õÊ¼»¯¸÷µãµ½ÆğµãµÄ¾àÀëÓëÂ·¾¶
+	memset(visited, 0, sizeof(visited));  // åˆå§‹åŒ–æ ‡è®°æ•°ç»„ å°†æ•°ç»„visitedå…¨éƒ¨è®¾ä¸º0
+	visited[source] = true;  // visitedæ•°ç»„è®°å½•è¯¥ç‚¹æ˜¯å¦éå†è¿‡
+	for (int i = 0; i < vertex_num; i++)//åˆå§‹åŒ–å„ç‚¹åˆ°èµ·ç‚¹çš„è·ç¦»ä¸è·¯å¾„
 	{
 		dist[i] = matrix[source][i];
 		path[i] = source;
 	}
 
-	int min_cost;        // È¨Öµ×îĞ¡
-	int min_cost_index;  // È¨Öµ×îĞ¡µÄÏÂ±ê
+	int min_cost;        // æƒå€¼æœ€å°
+	int min_cost_index;  // æƒå€¼æœ€å°çš„ä¸‹æ ‡
 
-	for (int i = 1; i < vertex_num; i++)  // ÕÒµ½Ô´µãµ½ÁíÍâ vertex_num-1 ¸öµãµÄ×î¶ÌÂ·¾¶
+	for (int i = 1; i < vertex_num; i++)  // æ‰¾åˆ°æºç‚¹åˆ°å¦å¤– vertex_num-1 ä¸ªç‚¹çš„æœ€çŸ­è·¯å¾„
 	{
 		min_cost = INT_MAX;
 
 		for (int j = 0; j < vertex_num; j++)
 		{
-			if (visited[j] == false && dist[j] < min_cost)  // ÕÒµ½ÓëÆğµãÖ±½ÓÏàÁ¬µÄµãÖĞÈ¨Öµ×îĞ¡µÄ£¬ÓëÆğµã²»Ö±½ÓÏàÁ¬µÄµãÈ¨ÖµÒÑ¾­³õÊ¼»¯Îª INT_MAX
+			if (visited[j] == false && dist[j] < min_cost)  // æ‰¾åˆ°ä¸èµ·ç‚¹ç›´æ¥ç›¸è¿çš„ç‚¹ä¸­æƒå€¼æœ€å°çš„ï¼Œä¸èµ·ç‚¹ä¸ç›´æ¥ç›¸è¿çš„ç‚¹æƒå€¼å·²ç»åˆå§‹åŒ–ä¸º INT_MAX
 			{
-				min_cost = dist[j];   //¸üĞÂ×îĞ¡µÄÈ¨Öµ
-				min_cost_index = j;  //¸üĞÂÈ¨Öµ×îĞ¡µãµÄ×ø±ê£¬
+				min_cost = dist[j];   //æ›´æ–°æœ€å°çš„æƒå€¼
+				min_cost_index = j;  //æ›´æ–°æƒå€¼æœ€å°ç‚¹çš„åæ ‡ï¼Œ
 			}
 		}
 
-		visited[min_cost_index] = true;  // ¸ÃµãÒÑÕÒµ½£¬½øĞĞ±ê¼Ç
+		visited[min_cost_index] = true;  // è¯¥ç‚¹å·²æ‰¾åˆ°ï¼Œè¿›è¡Œæ ‡è®°
 
-		for (int j = 0; j < vertex_num; j++)  // ¸üĞÂ dist Êı×é
+		for (int j = 0; j < vertex_num; j++)  // æ›´æ–° dist æ•°ç»„
 		{
-			if (visited[j] == false &&     // È·±£¸Ãµã»¹Î´ÕÒµ½´Ó ÆğµãµÄ×î¶ÌÂ·¾¶
-				matrix[min_cost_index][j] != INT_MAX &&  // È·±£Á½µãÖ®¼äÓĞ±ß
-				matrix[min_cost_index][j] + min_cost < dist[j])   //ÅĞ¶Ï¾­¹ıÖĞ¼äµãµ½ jµãµÄ¾àÀëÊÇ·ñĞ¡ÓÚjµãµ½ÆğµãµÄ¾àÀë
+			if (visited[j] == false &&     // ç¡®ä¿è¯¥ç‚¹è¿˜æœªæ‰¾åˆ°ä» èµ·ç‚¹çš„æœ€çŸ­è·¯å¾„
+				matrix[min_cost_index][j] != INT_MAX &&  // ç¡®ä¿ä¸¤ç‚¹ä¹‹é—´æœ‰è¾¹
+				matrix[min_cost_index][j] + min_cost < dist[j])   //åˆ¤æ–­ç»è¿‡ä¸­é—´ç‚¹åˆ° jç‚¹çš„è·ç¦»æ˜¯å¦å°äºjç‚¹åˆ°èµ·ç‚¹çš„è·ç¦»
 			{
-				dist[j] = matrix[min_cost_index][j] + min_cost;   //Èç¹ûÊÇ£¬¸üĞÂ¾àÀëÓëÂ·¾¶
+				dist[j] = matrix[min_cost_index][j] + min_cost;   //å¦‚æœæ˜¯ï¼Œæ›´æ–°è·ç¦»ä¸è·¯å¾„
 				path[j] = min_cost_index;
 			}
 		}
@@ -56,35 +61,35 @@ void Dijkstra(int source)
 
 int main()
 {
-	cout << "ÇëÊäÈëÍ¼µÄ¶¥µãÊı£¨<100£©£º";
+	cout << "è¯·è¾“å…¥å›¾çš„é¡¶ç‚¹æ•°ï¼ˆ<100ï¼‰ï¼š";
 	cin >> vertex_num;
-	cout << "ÇëÊäÈëÍ¼µÄ±ßÊı£º";
+	cout << "è¯·è¾“å…¥å›¾çš„è¾¹æ•°ï¼š";
 	cin >> side_num;
 
 	for (int i = 0; i < vertex_num; i++)
 		for (int j = 0; j < vertex_num; j++)
-			matrix[i][j] = (i != j) ? INT_MAX : 0;  // ³õÊ¼»¯ matrix Êı×é
+			matrix[i][j] = (i != j) ? INT_MAX : 0;  // åˆå§‹åŒ– matrix æ•°ç»„
 
-	cout << "ÇëÊäÈë±ßµÄĞÅÏ¢£¬²¢ÓÃ¿Õ¸ñ¸ô¿ª£º\n";
-	int u, v, w;						//u,vÎªÃ¿Ìõ±ßÉÏµÄÁ½µã    wÎª±ßµÄÈ¨ÖØ£¬
+	cout << "è¯·è¾“å…¥è¾¹çš„ä¿¡æ¯ï¼Œå¹¶ç”¨ç©ºæ ¼éš”å¼€ï¼š\n";
+	int u, v, w;						//u,vä¸ºæ¯æ¡è¾¹ä¸Šçš„ä¸¤ç‚¹    wä¸ºè¾¹çš„æƒé‡ï¼Œ
 	for (int i = 0; i < side_num; i++)
 	{
 		cin >> u >> v >> w;
 		matrix[u][v] = matrix[v][u] = w;
 	}
 
-	cout << "ÇëÊäÈëÔ´µã£¨<" << vertex_num << "£©£º";
+	cout << "è¯·è¾“å…¥æºç‚¹ï¼ˆ<" << vertex_num << "ï¼‰ï¼š";
 	cin >> source;
 
 
 	Dijkstra(source);
 
-	for (int i = 0; i < vertex_num; i++)   //¾­¹ıµÄÂ·¾¶ÊÇ·´ÏòÊä³öµÄ£¬´ÓÖÕµãÄæÏòÊä³öµ½Æğµã
+	for (int i = 0; i < vertex_num; i++)   //ç»è¿‡çš„è·¯å¾„æ˜¯åå‘è¾“å‡ºçš„ï¼Œä»ç»ˆç‚¹é€†å‘è¾“å‡ºåˆ°èµ·ç‚¹
 	{
 		if (i != source)
 		{
-			cout << source << "µ½" << i << "×î¶Ì¾àÀëÊÇ£º" << dist[i] << "£¬Â·¾¶ÊÇ£º" << i;
-			int t = path[i];  // path[i] ´æ·ÅµÄÊÇ iµãµÄ×î¶ÌÂ·¾¶ÖĞÓëiÏàÁ¬µÄÉÏÒ»¸ö½Úµã 
+			cout << source << "åˆ°" << i << "æœ€çŸ­è·ç¦»æ˜¯ï¼š" << dist[i] << "ï¼Œè·¯å¾„æ˜¯ï¼š" << i;
+			int t = path[i];  // path[i] å­˜æ”¾çš„æ˜¯ iç‚¹çš„æœ€çŸ­è·¯å¾„ä¸­ä¸iç›¸è¿çš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹ 
 			while (t != source)
 			{
 				cout << "--" << t;
